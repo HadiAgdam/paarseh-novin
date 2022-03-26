@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.verifyphone.VerifyPhoneActivity">
+    tools:context=".activity.register.verifyphone.VerifyPhoneActivity">
 
 
     <ImageView
@@ -12,6 +12,8 @@
         android:layout_height="match_parent"
         android:src="@drawable/joanna_kosinska_7acuhoezuyk_unsplash"
         android:scaleType="centerCrop" />
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="50dp"

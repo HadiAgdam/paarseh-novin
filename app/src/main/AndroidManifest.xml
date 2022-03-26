@@ -13,7 +13,10 @@
         android:theme="@style/Theme.Design.NoActionBar"
         android:usesCleartextTraffic="false">
         <activity
-            android:name=".activity.verifyphone.VerifyPhoneActivity"
+            android:name=".activity.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.register.verifyphone.VerifyPhoneActivity"
             android:exported="false" />
         <activity
             android:name=".activity.login.LoginActivity"

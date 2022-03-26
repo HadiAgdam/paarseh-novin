@@ -1,4 +1,4 @@
-package com.hadiagdamapps.paarseh.activity.verifyphone;
+package com.hadiagdamapps.paarseh.activity.register.verifyphone;
 
 import androidx.appcompat.app.AppCompatActivity;
 

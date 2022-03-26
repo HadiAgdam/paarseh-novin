@@ -12,6 +12,11 @@
         android:src="@drawable/sigmund_65u8d_inh0m_unsplash"
         android:scaleType="fitXY" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="50dp"
         android:layout_width="250dp"

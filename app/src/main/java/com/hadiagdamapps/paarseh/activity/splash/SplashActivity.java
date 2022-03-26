@@ -15,8 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.hadiagdamapps.paarseh.R;
 import com.hadiagdamapps.paarseh.activity.intro.IntroActivity;
-import com.hadiagdamapps.paarseh.activity.login.LoginActivity;
-import com.hadiagdamapps.paarseh.activity.verifyphone.VerifyPhoneActivity;
+import com.hadiagdamapps.paarseh.activity.main.MainActivity;
+import com.hadiagdamapps.paarseh.activity.register.verifyphone.VerifyPhoneActivity;
 import com.hadiagdamapps.paarseh.helpers.MySingleton;
 
 import static com.hadiagdamapps.paarseh.helpers.Statics.*;
@@ -98,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 //        main();
-        Intent intent = new Intent(this, VerifyPhoneActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

@@ -2,6 +2,8 @@ package com.hadiagdamapps.paarseh.activity.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.hadiagdamapps.paarseh.R;
+import com.hadiagdamapps.paarseh.activity.register.verifyphone.VerifyPhoneActivity;
 import com.hadiagdamapps.paarseh.helpers.MySingleton;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -26,7 +29,14 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void success(){
-
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("phone", phoneText.getText().toString());
+        editor.putString("password", passwordText.getText().toString());
+        editor.apply();
+        Intent intent = new Intent(this, VerifyPhoneActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void error(Exception ex){
@@ -40,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             StringRequest request = new StringRequest("https://hadiagdam.pythonanywhere.com/createUser?name=" + nameText.getText() + "&phone=" + phoneText.getText() + "&password=" + passwordText.getText(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    Log.e("response", response);
                     if (response.equals("success")) success();
                     else if (response.equals("phone number is used")) invalidPhone();
                 }
@@ -58,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         nameText = findViewById(R.id.nameText);
         phoneText = findViewById(R.id.phoneText);
         passwordText = findViewById(R.id.passwordText);
-        registerButton = findViewById(R.id.registerButton);
+        registerButton = findViewById(R.id.buttonRegister);
         registerButton.setOnClickListener(registerListener);
     }
 

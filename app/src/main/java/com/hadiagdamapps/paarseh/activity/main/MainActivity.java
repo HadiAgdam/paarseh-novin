@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView levelRecycler;
 
 
-    private void initialRecycler(){
+    private void initialRecycler() {
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
         String phone = preferences.getString("phone", "");
         String password = preferences.getString("password", "");
@@ -38,16 +38,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.e("response", response);
-                if (response.equals("user not found")){
+                if (response.equals("user not found")) {
                     Statics.backToLogin(MainActivity.this);
                 }
 
-                try{
+                try {
 
                     JSONArray levels = new JSONArray(response);
 
                     ArrayList<LevelRecyclerModel> list = new ArrayList<>();
-                    for (int i = 0; i < levels.length(); i++){
+                    for (int i = 0; i < levels.length(); i++) {
                         JSONObject level = levels.getJSONObject(i);
 
                         Log.e("level", level.toString());
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("pos", "before steps");
                         Log.e("pos", "after");
                         JSONArray stepsJson = level.getJSONArray("steps");
-                        for (int j = 0; j < stepsJson.length(); j++){
+                        for (int j = 0; j < stepsJson.length(); j++) {
                             JSONObject step = stepsJson.getJSONObject(j);
                             StepRecyclerModel model = new StepRecyclerModel(Integer.parseInt(step.getString("id")), step.getString("name"), step.getString("description"), !step.getBoolean("access"), 0);
                             steps.add(model);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     LevelRecyclerAdapter adapter = new LevelRecyclerAdapter(MainActivity.this, list);
                     levelRecycler.setAdapter(adapter);
 
-                } catch (Exception ex){
+                } catch (Exception ex) {
                     Log.e("error", ex.toString());
                 }
 
@@ -99,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
         levelRecycler.setAdapter(adapter);
         * */
 
-    private void initialView(){
+    private void initialView() {
         levelRecycler = findViewById(R.id.levelRecycler);
         levelRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         initialRecycler();
     }
 
-    private void main(){
+    private void main() {
         initialView();
     }
 

@@ -3,6 +3,7 @@ package com.hadiagdamapps.paarseh.activity.login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.hadiagdamapps.paarseh.R;
+import com.hadiagdamapps.paarseh.activity.main.MainActivity;
 import com.hadiagdamapps.paarseh.helpers.MySingleton;
 
 import org.json.JSONArray;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("register_date", data.getString("register_date"));
             editor.putString("password", data.getString("password"));
             editor.apply();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }catch (Exception ex){
             Log.e("error", ex.toString());
         }

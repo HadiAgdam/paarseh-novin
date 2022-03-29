@@ -1,6 +1,7 @@
 package com.hadiagdamapps.paarseh.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,9 @@ public class StepRecyclerAdapter extends RecyclerView.Adapter<StepRecyclerAdapte
 
     private void go(int id){
         Toast.makeText(self, "id :" + id, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(self, null);
+        intent.putExtra("step id", id + "");
+        self.startActivity(intent);
     }
 
     @Override

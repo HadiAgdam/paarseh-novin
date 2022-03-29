@@ -50,11 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < levels.length(); i++) {
                         JSONObject level = levels.getJSONObject(i);
 
-                        Log.e("level", level.toString());
 
                         ArrayList<StepRecyclerModel> steps = new ArrayList<>();
-                        Log.e("pos", "before steps");
-                        Log.e("pos", "after");
                         JSONArray stepsJson = level.getJSONArray("steps");
                         for (int j = 0; j < stepsJson.length(); j++) {
                             JSONObject step = stepsJson.getJSONObject(j);
@@ -68,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     LevelRecyclerAdapter adapter = new LevelRecyclerAdapter(MainActivity.this, list);
                     levelRecycler.setAdapter(adapter);
+
+                    SharedPreferences p = getSharedPreferences("data", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = p.edit();
+                    editor.putString("json", response);
+                    editor.apply();
 
                 } catch (Exception ex) {
                     Log.e("error", ex.toString());

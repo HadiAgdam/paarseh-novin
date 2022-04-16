@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:usesCleartextTraffic="false">
+        <activity
+            android:name=".activity.step.main_video.MainVideoActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.step.StepActivity"
             android:exported="false" />

@@ -162,7 +162,7 @@ public class ListenAndRepeatActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK) {
             String result = trim(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
-            if (result.trim().equals(trim(text))) {
+            if (trim(result).equals(trim(text))) {
                 correctAnswer();
             } else {
                 wrongAnswer();

@@ -85,30 +85,16 @@ public class MainActivity extends AppCompatActivity {
         MySingleton.getInstance(this).addToRequestQueue(request);
     }
 
-    /*
-    * ArrayList<LevelRecyclerModel> list = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            ArrayList<StepRecyclerModel> models = new ArrayList<>();
-            for (int j = 0; j < 10; j++){
-                StepRecyclerModel model =new StepRecyclerModel(i * j, j + " name", j + " description", j < 5, i * j);
-                models.add(model);
-            }
-            StepRecyclerAdapter adapter = new StepRecyclerAdapter(models, this);
-            LevelRecyclerModel model = new LevelRecyclerModel(i, "its level " + i, adapter);
-            list.add(model);
-        }
-        LevelRecyclerAdapter adapter = new LevelRecyclerAdapter(this, list);
-        levelRecycler.setAdapter(adapter);
-        * */
+
 
     private void initialView() {
         levelRecycler = findViewById(R.id.levelRecycler);
         levelRecycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        initialRecycler();
     }
 
     private void main() {
         initialView();
+        initialRecycler();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.hadiagdamapps.paarseh.activity.step.lar_sentences;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -30,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 public class ListenAndRepeatActivity extends AppCompatActivity {
 
@@ -41,12 +44,14 @@ public class ListenAndRepeatActivity extends AppCompatActivity {
     private String text;
     private int correct_count = 0;
     private TextToSpeech speech;
-
+    private ConstraintLayout infoLayout;
+    private LottieAnimationView lottieAnimationView;
 
     View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            finish();
+//            finish();
+            correctAnswer();
         }
     };
 
@@ -83,12 +88,40 @@ public class ListenAndRepeatActivity extends AppCompatActivity {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
+    private void wrongAnimation() {
+        int[] animations = new int[]{R.raw.angry_emoji};
+        int r = (int) Math.floor(Math.random() * (animations.length + 1));
+
+        infoLayout.setVisibility(View.INVISIBLE);
+        lottieAnimationView.setAnimation(animations[r]);
+        lottieAnimationView.playAnimation();
+    }
+
     private void wrongAnswer() {
-        toast("wrong answer");
+        wrongAnimation();
+    }
+
+    private void correctAnimation() {
+        int[] animations = new int[]{R.raw.animated_emojis_party_emoji, R.raw.emoji_33, R.raw.grinning_face_emoji, R.raw.happy_emoji, R.raw.happy_emoji_great_work, R.raw.love_emoji, R.raw.smiley_emoji, R.raw.tbd_happyface, R.raw.winking_emoji};
+        int r = (int) Math.floor(Math.random() * (animations.length + 1));
+
+        toast(r + "");
+
+        infoLayout.setVisibility(View.VISIBLE);
+        lottieAnimationView.setAnimation(animations[r]);
+        lottieAnimationView.playAnimation();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                infoLayout.setVisibility(View.INVISIBLE);
+            }
+        }, 2000);
+
     }
 
     private void correctAnswer() {
-        toast("true answer");
+        correctAnimation();
         correct_count++;
         String t = String.valueOf(correct_count);
         counterText.setText(t + "/ 10");
@@ -148,6 +181,8 @@ public class ListenAndRepeatActivity extends AppCompatActivity {
         micText = findViewById(R.id.micText);
         micText.setOnClickListener(micListener);
         counterText = findViewById(R.id.counterText);
+        infoLayout = findViewById(R.id.infoLayout);
+        lottieAnimationView = findViewById(R.id.animation);
     }
 
     private void main() {

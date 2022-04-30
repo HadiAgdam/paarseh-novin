@@ -13,11 +13,28 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:usesCleartextTraffic="false">
         <activity
+            android:name=".activity.step.organize_sentences.OrganizeSentencesActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".activity.step.law.ListenAndWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.step.lar_words.ListenAndRepeatWords"
+            android:exported="false" />
+        <activity
             android:name=".activity.step.main_video.MainVideoActivity"
             android:exported="false" />
         <activity
             android:name=".activity.step.StepActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".activity.step.lar_sentences.ListenAndRepeatActivity"
             android:exported="false" />
@@ -39,11 +56,8 @@
         <activity
             android:name=".activity.splash.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 

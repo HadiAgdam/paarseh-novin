@@ -18,6 +18,7 @@ import com.hadiagdamapps.paarseh.activity.intro.IntroActivity;
 import com.hadiagdamapps.paarseh.activity.main.MainActivity;
 import com.hadiagdamapps.paarseh.activity.register.verifyphone.VerifyPhoneActivity;
 import com.hadiagdamapps.paarseh.activity.step.lar_sentences.ListenAndRepeatActivity;
+import com.hadiagdamapps.paarseh.activity.step.law.ListenAndWriteActivity;
 import com.hadiagdamapps.paarseh.helpers.MySingleton;
 
 import static com.hadiagdamapps.paarseh.helpers.Statics.*;
@@ -27,71 +28,43 @@ import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 
-
-    private void initialView(){
+    private void initialView() {
 
     }
 
-    private boolean checkUser(String phone, String password){
-        final boolean[] result = new boolean[]{false};
+    private void checkUser() {
+
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        String phone = preferences.getString("phone", "testPhone");
+        String password = preferences.getString("password", "testPhone");
+
         StringRequest request = new StringRequest(BASE_URL + "/getuser?phone=" + phone + "&password=" + password, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("response", response);
-                result[0] = response.equals("ok");
+
+                Intent next = new Intent(SplashActivity.this, response.equals("ok") ? MainActivity.class : IntroActivity.class);
+                startActivity(next);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                result[0] = false;
                 Log.e("SplashActivityCheckUser", error.toString());
             }
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<>();
-                params.put("phone", phone);
-                params.put("password", password);
-                return null;
-            }
-        };
+        });
 
         MySingleton.getInstance(this).addToRequestQueue(request);
 
-        return result[0];
     }
 
-    private void fin(){
+    private void fin() {
         finish();
     }
 
-    private void go(){
-        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
-        String username = preferences.getString("phone", "testPhone");
-        String password = preferences.getString("password", "testPassword");
-        final Intent next = checkUser(username, password) ? null : new Intent(this, IntroActivity.class);
 
-
-        new CountDownTimer(3000, 1000){
-
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                startActivity(next);
-                SplashActivity.this.finish();
-                fin();
-            }
-        }.start();
-    }
-
-    private void main(){
+    private void main() {
         initialView();
-        go();
+        checkUser();
     }
 
     @Override
@@ -99,6 +72,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         main();
-//        startActivity(new Intent(this, ListenAndRepeatActivity.class));
+
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("phone", "testPhone");
+        editor.putString("password", "testPassword");
+        editor.apply();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
